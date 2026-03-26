@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #0a0a0f;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* Scrollbar personalizado estilo cyberpunk */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #7c3aed;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00d4ff;
+  }
+}
+
+@layer utilities {
+  .glow-purple { text-shadow: 0 0 20px rgba(124, 58, 237, 0.8); }
+  .glow-cyan   { text-shadow: 0 0 20px rgba(0, 212, 255, 0.8); }
+  .glow-pink   { text-shadow: 0 0 20px rgba(255, 0, 110, 0.8); }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .border-neon-purple { border-color: #7c3aed; }
+  .border-neon-cyan   { border-color: #00d4ff; }
+  .border-neon-pink   { border-color: #ff006e; }
+}
