@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getAnimeById, getAnimeCharacters } from '../services/jikanApi'
+import { actualizarEstado, agregarAnime, eliminarAnime, verificarEnLista } from '../services/listaService'
+import { useAuthStore } from '../store/authStore'
 
 // ─── Componente Badge ─────────────────────────────────────────────────────────
 function Badge({ children, color = 'purple' }) {
@@ -93,6 +95,150 @@ return (
         <p className="text-gray-600 text-xs">{role}</p>
         </div>
     ))}
+    </div>
+)
+}
+
+// ─── Botón agregar a lista ────────────────────────────────────────────────────
+const STATUS_OPTIONS = [
+{ value: 'viendo',     label: '▶️ Viendo',     color: 'text-neon-cyan' },
+{ value: 'completado', label: '✅ Completado',  color: 'text-green-400' },
+{ value: 'pendiente',  label: '⏳ Pendiente',   color: 'text-yellow-400' },
+{ value: 'favorito',   label: '❤️ Favorito',    color: 'text-neon-pink' },
+]
+
+function ListaButton({ anime }) {
+const { user }                      = useAuthStore()
+const [enLista, setEnLista]         = useState(null)
+const [loading, setLoading]         = useState(true)
+const [menuOpen, setMenuOpen]       = useState(false)
+const [actionLoading, setActionLoading] = useState(false)
+
+useEffect(() => {
+    if (!user) { setLoading(false); return }
+
+    verificarEnLista({ userId: user.id, animeId: anime.mal_id })
+    .then(data => setEnLista(data))
+    .catch(() => setEnLista(null))
+    .finally(() => setLoading(false))
+}, [user, anime.mal_id])
+
+if (!user) return (
+    <Link to="/login"
+    className="flex items-center gap-2 px-5 py-2 rounded-xl border border-dark-border
+                text-gray-400 hover:border-neon-purple hover:text-neon-purple transition-all text-sm">
+    🔐 Inicia sesión para agregar a tu lista
+    </Link>
+)
+
+if (loading) return (
+    <div className="h-10 w-48 bg-dark-card rounded-xl animate-pulse" />
+)
+
+const handleAgregar = async (status) => {
+    try {
+    setActionLoading(true)
+    const data = await agregarAnime({
+        userId:     user.id,
+        animeId:    anime.mal_id,
+        animeTitle: anime.title,
+        animeImage: anime.images?.jpg?.image_url,
+        status,
+    })
+    setEnLista(data)
+    setMenuOpen(false)
+    } catch {
+    alert('Error al agregar el anime')
+    } finally {
+    setActionLoading(false)
+    }
+}
+
+const handleCambiarEstado = async (status) => {
+    try {
+    setActionLoading(true)
+    const data = await actualizarEstado({
+        userId:  user.id,
+        animeId: anime.mal_id,
+        status,
+    })
+    setEnLista(data)
+    setMenuOpen(false)
+    } catch {
+    alert('Error al actualizar')
+    } finally {
+    setActionLoading(false)
+    }
+}
+
+const handleEliminar = async () => {
+    if (!confirm('¿Eliminar este anime de tu lista?')) return
+    try {
+    setActionLoading(true)
+    await eliminarAnime({ userId: user.id, animeId: anime.mal_id })
+    setEnLista(null)
+    setMenuOpen(false)
+    } catch {
+    alert('Error al eliminar')
+    } finally {
+    setActionLoading(false)
+    }
+}
+
+return (
+    <div className="relative">
+    {enLista ? (
+        // Ya está en la lista
+        <div className="flex items-center gap-2">
+        <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            disabled={actionLoading}
+            className="flex items-center gap-2 px-5 py-2 rounded-xl bg-neon-purple/20
+                    border border-neon-purple text-neon-purple hover:bg-neon-purple/30
+                    transition-all text-sm font-medium"
+        >
+            ✅ En tu lista — {STATUS_OPTIONS.find(s => s.value === enLista.status)?.label}
+            <span className="text-xs">▼</span>
+        </button>
+        <button
+            onClick={handleEliminar}
+            disabled={actionLoading}
+            className="px-3 py-2 rounded-xl border border-dark-border text-gray-500
+                    hover:border-red-500 hover:text-red-400 transition-all text-sm"
+        >
+            🗑️
+        </button>
+        </div>
+    ) : (
+        // No está en la lista
+        <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        disabled={actionLoading}
+        className="flex items-center gap-2 px-5 py-2 rounded-xl bg-neon-purple
+                    hover:bg-neon-purple/80 text-white transition-all text-sm
+                    font-medium hover:shadow-neon-purple"
+        >
+        + Agregar a mi lista
+        </button>
+    )}
+
+      {/* Dropdown de opciones */}
+    {menuOpen && (
+        <div className="absolute top-12 left-0 z-20 bg-dark-card border border-dark-border
+                        rounded-xl overflow-hidden shadow-xl min-w-48">
+        {STATUS_OPTIONS.map(opt => (
+            <button
+            key={opt.value}
+            onClick={() => enLista ? handleCambiarEstado(opt.value) : handleAgregar(opt.value)}
+            className={`w-full text-left px-4 py-3 text-sm hover:bg-white/5
+                        transition-colors ${opt.color}
+                        ${enLista?.status === opt.value ? 'bg-white/5' : ''}`}
+            >
+            {opt.label}
+            </button>
+        ))}
+        </div>
+    )}
     </div>
 )
 }
@@ -219,6 +365,11 @@ return (
             <div className="flex flex-wrap gap-2 mb-4">
             {anime.genres?.map(g => <Badge key={g.mal_id}>{g.name}</Badge>)}
             {anime.themes?.map(t => <Badge key={t.mal_id} color="cyan">{t.name}</Badge>)}
+            </div>
+
+            {/* Botón Mi Lista */}
+            <div className="mb-4">
+            <ListaButton anime={anime} />
             </div>
 
             {/* Info rápida */}

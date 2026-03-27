@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './components/layout/Footer'
 import Navbar from './components/layout/Navbar'
@@ -10,9 +11,16 @@ import MiLista from './pages/MiLista'
 import NoticiaDetalle from './pages/NoticiaDetalle'
 import Noticias from './pages/Noticias'
 import TopAnime from './pages/TopAnime'
+import { useAuthStore } from './store/authStore'
 
 
 function App() {
+  const initialize = useAuthStore(state => state.initialize)
+
+useEffect(() => {
+  initialize()
+}, [])
+
   return (
     <div className="min-h-screen bg-dark-bg text-white flex flex-col">
       <Navbar />

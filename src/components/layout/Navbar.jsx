@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useAuthStore } from '../../store/authStore'
 
-// Links de navegación — fácil de agregar más aquí
 const navLinks = [
 { path: '/',           label: 'Inicio' },
 { path: '/directorio', label: 'Directorio' },
@@ -13,10 +13,15 @@ const navLinks = [
 
 function Navbar() {
 const [menuOpen, setMenuOpen] = useState(false)
-const location = useLocation()
+const location  = useLocation()
+const { user, signOut } = useAuthStore()
 
-  // Verifica si el link actual es la página activa
 const isActive = (path) => location.pathname === path
+
+const handleSignOut = async () => {
+    await signOut()
+    setMenuOpen(false)
+}
 
 return (
     <nav className="glass sticky top-0 z-50 border-b border-dark-border">
@@ -25,12 +30,8 @@ return (
 
           {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-            <span className="font-orbitron font-black text-xl text-neon-cyan glow-cyan">
-            ARI
-            </span>
-            <span className="font-orbitron font-black text-xl text-neon-purple glow-purple">
-            VERSE
-            </span>
+            <span className="font-orbitron font-black text-xl text-neon-cyan glow-cyan">ARI</span>
+            <span className="font-orbitron font-black text-xl text-neon-purple glow-purple">VERSE</span>
         </Link>
 
           {/* Links desktop */}
@@ -50,19 +51,34 @@ return (
             ))}
         </div>
 
-          {/* Botón Login desktop */}
+          {/* Auth desktop */}
         <div className="hidden md:flex items-center gap-3">
+            {user ? (
+            <div className="flex items-center gap-3">
+                <span className="text-gray-400 text-sm">
+                {user.email?.split('@')[0]}
+                </span>
+                <button
+                onClick={handleSignOut}
+                className="px-4 py-2 rounded-lg border border-dark-border text-gray-400
+                            text-sm hover:border-red-500 hover:text-red-400 transition-all"
+                >
+                Salir
+                </button>
+            </div>
+            ) : (
             <Link
-            to="/login"
-            className="px-4 py-2 rounded-lg border border-neon-purple text-neon-purple 
-                        text-sm font-medium hover:bg-neon-purple hover:text-white 
+                to="/login"
+                className="px-4 py-2 rounded-lg border border-neon-purple text-neon-purple
+                        text-sm font-medium hover:bg-neon-purple hover:text-white
                         transition-all duration-300 hover:shadow-neon-purple"
             >
-            Iniciar Sesión
+                Iniciar Sesión
             </Link>
+            )}
         </div>
 
-          {/* Botón hamburguesa mobile */}
+          {/* Hamburguesa mobile */}
         <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden text-gray-400 hover:text-white p-2"
@@ -76,7 +92,7 @@ return (
     </div>
 
       {/* Menú mobile */}
-    {menuOpen && (
+        {menuOpen && (
         <div className="md:hidden border-t border-dark-border px-4 py-3 flex flex-col gap-1">
         {navLinks.map((link) => (
             <Link
@@ -92,15 +108,25 @@ return (
             {link.label}
             </Link>
         ))}
-        <Link
+        {user ? (
+            <button
+            onClick={handleSignOut}
+            className="mt-2 px-4 py-2 rounded-lg border border-red-500/50 
+                        text-red-400 text-sm text-center transition-all"
+            >
+            Cerrar Sesión
+            </button>
+        ) : (
+            <Link
             to="/login"
             onClick={() => setMenuOpen(false)}
-            className="mt-2 px-4 py-2 rounded-lg border border-neon-purple text-neon-purple 
-                text-sm font-medium text-center hover:bg-neon-purple hover:text-white 
-                transition-all duration-300"
-        >
+            className="mt-2 px-4 py-2 rounded-lg border border-neon-purple text-neon-purple
+                        text-sm font-medium text-center hover:bg-neon-purple hover:text-white
+                        transition-all duration-300"
+            >
             Iniciar Sesión
-        </Link>
+            </Link>
+        )}
         </div>
     )}
     </nav>
