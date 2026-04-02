@@ -23,6 +23,17 @@ signUp: async (email, password) => {
     return data
 },
 
+// Login con Google
+signInWithGoogle: async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.origin
+    }
+  })
+  if (error) throw error
+},
+
   // Login
 signIn: async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
