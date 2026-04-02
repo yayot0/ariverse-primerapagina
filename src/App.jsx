@@ -8,6 +8,7 @@ import Directorio from './pages/Directorio'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import MiLista from './pages/MiLista'
+import NotFound from './pages/NotFound'
 import NoticiaDetalle from './pages/NoticiaDetalle'
 import Noticias from './pages/Noticias'
 import Perfil from './pages/Perfil'
@@ -37,6 +38,7 @@ useEffect(() => {
           <Route path="/anime/:id" element={<AnimeDetalle />} />
           <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
           <Route path="/perfil" element={<Perfil />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
