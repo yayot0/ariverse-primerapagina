@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import MiLista from './pages/MiLista'
 import NoticiaDetalle from './pages/NoticiaDetalle'
 import Noticias from './pages/Noticias'
+import Perfil from './pages/Perfil'
 import TopAnime from './pages/TopAnime'
 import { useAuthStore } from './store/authStore'
 
@@ -35,6 +36,7 @@ useEffect(() => {
           <Route path="/login"      element={<Login />} />
           <Route path="/anime/:id" element={<AnimeDetalle />} />
           <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </main>
       <Footer />

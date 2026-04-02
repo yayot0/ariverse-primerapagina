@@ -52,20 +52,31 @@ return (
         </div>
 
           {/* Auth desktop */}
-        <div className="hidden md:flex items-center gap-3">
-            {user ? (
-            <div className="flex items-center gap-3">
-                <span className="text-gray-400 text-sm">
-                {user.email?.split('@')[0]}
-                </span>
-                <button
-                onClick={handleSignOut}
-                className="px-4 py-2 rounded-lg border border-dark-border text-gray-400
-                            text-sm hover:border-red-500 hover:text-red-400 transition-all"
-                >
-                Salir
-                </button>
-            </div>
+        {user ? (
+<div className="flex items-center gap-3">
+    <Link
+    to="/perfil"
+    className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/5 
+                transition-all group"
+    >
+    <div className="w-7 h-7 rounded-full bg-neon-purple/30 border border-neon-purple/50
+                    flex items-center justify-center group-hover:border-neon-purple transition-all">
+        <span className="text-neon-purple text-xs font-bold">
+        {user.email?.[0].toUpperCase()}
+        </span>
+    </div>
+    <span className="text-gray-400 text-sm group-hover:text-white transition-colors">
+        {user.email?.split('@')[0]}
+    </span>
+    </Link>
+    <button
+    onClick={handleSignOut}
+    className="px-4 py-2 rounded-lg border border-dark-border text-gray-400
+                text-sm hover:border-red-500 hover:text-red-400 transition-all"
+    >
+    Salir
+    </button>
+</div>
             ) : (
             <Link
                 to="/login"
@@ -89,7 +100,6 @@ return (
         </button>
 
         </div>
-    </div>
 
       {/* Menú mobile */}
         {menuOpen && (
@@ -111,7 +121,7 @@ return (
         {user ? (
             <button
             onClick={handleSignOut}
-            className="mt-2 px-4 py-2 rounded-lg border border-red-500/50 
+            className="mt-2 px-4 py-2 rounded-lg border border-red-500/50
                         text-red-400 text-sm text-center transition-all"
             >
             Cerrar Sesión
