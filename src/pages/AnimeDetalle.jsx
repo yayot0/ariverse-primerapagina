@@ -415,15 +415,16 @@ return (
         <CharactersSection animeId={id} />
         </section>
 
+        {/* Reseñas */}
+<ReviewSection
+animeId={Number(id)}
+animeTitle={anime.title}
+/>
+
     </div>
     </div>
 )
 }
 
-{/* Reseñas */}
-<ReviewSection
-animeId={Number(id)}
-animeTitle={anime.title}
-/>
 
 export default AnimeDetalle
