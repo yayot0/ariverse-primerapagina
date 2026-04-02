@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import ReviewSection from '../components/ui/ReviewSection'
 import { getAnimeById, getAnimeCharacters } from '../services/jikanApi'
 import { actualizarEstado, agregarAnime, eliminarAnime, verificarEnLista } from '../services/listaService'
 import { useAuthStore } from '../store/authStore'
@@ -418,5 +419,11 @@ return (
     </div>
 )
 }
+
+{/* Reseñas */}
+<ReviewSection
+animeId={Number(id)}
+animeTitle={anime.title}
+/>
 
 export default AnimeDetalle
