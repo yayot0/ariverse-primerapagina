@@ -133,15 +133,9 @@ return (
 function Home() {
 return (
     <div>
-        <SEO
-        title="AriVerse - Tu Portal de Anime Definitivo"
-        description="Descubre los mejores rankings, noticias y calendario de estrenos de anime en AriVerse."
-    />
-
-    <HeroSection />
+    <SEO />
     <HeroSection />
 
-      {/* Separador */}
     <div className="w-full h-px bg-gradient-to-r from-transparent via-neon-purple to-transparent" />
 
     <AnimeSection
