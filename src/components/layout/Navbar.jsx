@@ -54,6 +54,18 @@ return (
           {/* Auth desktop */}
         {user ? (
 <div className="flex items-center gap-3">
+
+    {user?.email === 'yahirp827@gmail.com' && (
+<Link
+    to="/admin/noticias"
+    className="px-3 py-2 rounded-lg border border-dark-border text-gray-400
+            hover:border-neon-purple hover:text-neon-purple transition-all text-sm"
+    title="Panel de Admin"
+>
+    ⚙️
+</Link>
+)}
+
     <Link
     to="/perfil"
     className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/5 
