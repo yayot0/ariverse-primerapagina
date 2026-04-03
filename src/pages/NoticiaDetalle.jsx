@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import SEO from '../components/ui/SEO'
 import { noticias } from '../data/noticias'
 
 function NoticiaDetalle() {
@@ -24,6 +25,14 @@ const fecha = new Date(noticia.fecha).toLocaleDateString('es-MX', {
 
 return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
+
+        <SEO
+title={noticia.titulo}
+description={noticia.resumen}
+image={noticia.imagen}
+url={`https://ariverse-primerapagina.vercel.app/noticias/${noticia.slug}`}
+type="article"
+/>
 
       {/* Volver */}
     <Link to="/noticias"

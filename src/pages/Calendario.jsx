@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/ui/SEO'
 
 const TEMPORADAS = ['winter', 'spring', 'summer', 'fall']
 const TEMPORADA_LABELS = {
@@ -104,6 +105,12 @@ const years = Array.from({ length: 6 }, (_, i) => getCurrentYear() - i)
 
 return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <SEO
+title="Calendario de Estrenos"
+description="Calendario de estrenos de anime por temporada. Conoce qué animes se estrenan cada temporada."
+url="https://ariverse-primerapagina.vercel.app/calendario"
+/>
 
       {/* Header */}
     <div className="text-center mb-10">

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import LoadingGrid from '../components/ui/LoadingGrid'
 import Pagination from '../components/ui/Pagination'
+import SEO from '../components/ui/SEO'
 import { searchAnimeWithFilters } from '../services/jikanApi'
 
 // ─── Medalla según posición ───────────────────────────────────────────────────
@@ -169,6 +170,12 @@ const restAnime = animes.slice(3)
 
 return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <SEO
+        title="Top Anime | AriVerse"
+        description="Explora los animes mejor calificados de todos los tiempos. Rankings actualizados y podio de los favoritos de la comunidad." 
+        url="https://ariverse-primerapagina.vercel.app/top"
+    />
 
       {/* Header */}
     <div className="text-center mb-10">

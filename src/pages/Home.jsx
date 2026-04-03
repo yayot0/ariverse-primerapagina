@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import AnimeCard from '../components/ui/AnimeCard'
 import LoadingGrid from '../components/ui/LoadingGrid'
+import SEO from '../components/ui/SEO'
 import { useAnime } from '../hooks/useAnime'
 import { getCurrentSeason, getTopAnime } from '../services/jikanApi'
 
@@ -132,6 +133,12 @@ return (
 function Home() {
 return (
     <div>
+        <SEO
+        title="AriVerse - Tu Portal de Anime Definitivo"
+        description="Descubre los mejores rankings, noticias y calendario de estrenos de anime en AriVerse."
+    />
+
+    <HeroSection />
     <HeroSection />
 
       {/* Separador */}

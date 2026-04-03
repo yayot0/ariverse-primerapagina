@@ -4,6 +4,7 @@ import FilterBar from '../components/ui/FilterBar'
 import LoadingGrid from '../components/ui/LoadingGrid'
 import Pagination from '../components/ui/Pagination'
 import SearchBar from '../components/ui/SearchBar'
+import SEO from '../components/ui/SEO'
 import { searchAnimeWithFilters } from '../services/jikanApi'
 
 function Directorio() {
@@ -61,6 +62,12 @@ const handleTypeChange = (type) => {
 
 return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <SEO
+        title="Directorio de Anime | AriVerse"
+        description="Explora más de 30,000 animes. Busca por nombre, filtra por tipo y descubre tu próximo favorito en nuestro catálogo completo."
+        url="https://ariverse-primerapagina.vercel.app/directorio"
+    />
 
       {/* Header */}
     <div className="text-center mb-10">

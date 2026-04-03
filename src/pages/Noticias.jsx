@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/ui/SEO'
 import { categorias, noticias } from '../data/noticias'
 
 // ─── Card de noticia ──────────────────────────────────────────────────────────
@@ -78,6 +79,12 @@ const noticiasFiltradas = categoriaActiva === 'Todos'
 
 return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+      <SEO
+  title="Noticias de Anime"
+  description="Últimas noticias, análisis y guías del mundo del anime. Mantente al día con AriVerse."
+  url="https://ariverse-primerapagina.vercel.app/noticias"
+/>
 
       {/* Header */}
     <div className="text-center mb-10">

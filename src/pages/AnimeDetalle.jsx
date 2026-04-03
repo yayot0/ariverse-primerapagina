@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ReviewSection from '../components/ui/ReviewSection'
+import SEO from '../components/ui/SEO'
 import { getAnimeById, getAnimeCharacters } from '../services/jikanApi'
 import { actualizarEstado, agregarAnime, eliminarAnime, verificarEnLista } from '../services/listaService'
 import { useAuthStore } from '../store/authStore'
@@ -302,6 +303,14 @@ if (!anime) return null
 
 return (
     <div className="min-h-screen">
+
+        <SEO
+title={anime.title}
+description={anime.synopsis?.substring(0, 150) + '...' || 'Información completa del anime'}
+image={anime.images?.jpg?.large_image_url}
+url={`https://ariverse-primerapagina.vercel.app/anime/${id}`}
+type="article"
+/>
 
       {/* ── Hero con imagen de fondo ── */}
     <div className="relative h-64 md:h-80 overflow-hidden">
