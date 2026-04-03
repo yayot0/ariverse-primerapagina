@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './components/layout/Footer'
 import Navbar from './components/layout/Navbar'
+import AdminEditor from './pages/admin/AdminEditor'
+import AdminNoticias from './pages/admin/AdminNoticias'
 import AnimeDetalle from './pages/AnimeDetalle'
 import Calendario from './pages/Calendario'
 import Directorio from './pages/Directorio'
@@ -39,6 +41,9 @@ useEffect(() => {
           <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/admin/noticias" element={<AdminNoticias />} />
+          <Route path="/admin/noticias/nueva" element={<AdminEditor />} />
+          <Route path="/admin/noticias/editar/:id" element={<AdminEditor />} />
         </Routes>
       </main>
       <Footer />
