@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SEO from '../components/ui/SEO'
+import { getSeasonByYear } from '../services/jikanApi'
 
 const TEMPORADAS = ['winter', 'spring', 'summer', 'fall']
 const TEMPORADA_LABELS = {
@@ -82,14 +83,17 @@ useEffect(() => {
     try {
         setLoading(true)
         setError(null)
-        const res  = await fetch(
-        `https://api.jikan.moe/v4/seasons/${year}/${temporada}?limit=25`
-        )
-        if (!res.ok) throw new Error(`Error ${res.status}`)
-        const data = await res.json()
-        // Ordenar por score descendente
-        const sorted = (data.data || []).sort((a, b) => (b.score || 0) - (a.score || 0))
+        
+        // --- AQUÍ ESTÁ EL CAMBIO ---
+        // Usamos nuestra función del servicio en lugar del fetch manual
+        const result = await getSeasonByYear(year, temporada)
+        
+        // Ordenamos por calificación (score) de mayor a menor
+        const sorted = result.sort((a, b) => (b.score || 0) - (a.score || 0))
+        
         setAnimes(sorted)
+        // ---------------------------
+        
     } catch (err) {
         setError(err.message)
     } finally {
