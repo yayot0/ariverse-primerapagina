@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import PageTransition from '../components/ui/PageTransition'
 import ReviewSection from '../components/ui/ReviewSection'
 import SEO from '../components/ui/SEO'
 import { getAnimeById, getAnimeCharacters } from '../services/jikanApi'
@@ -302,6 +303,7 @@ if (error) return (
 if (!anime) return null
 
 return (
+    <PageTransition>
     <div className="min-h-screen">
 
         <SEO
@@ -432,6 +434,7 @@ animeTitle={anime.title}
 
     </div>
     </div>
+    </PageTransition>
 )
 }
 

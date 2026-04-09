@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import PageTransition from '../components/ui/PageTransition'
 
 function NotFound() {
 const navigate          = useNavigate()
@@ -22,6 +23,7 @@ useEffect(() => {
 }, [navigate])
 
 return (
+    <PageTransition>
     <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
 
       {/* Fondo animado */}
@@ -109,6 +111,7 @@ return (
 
     </div>
     </div>
+    </PageTransition>
 )
 }
 

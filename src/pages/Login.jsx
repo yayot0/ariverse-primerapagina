@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import PageTransition from '../components/ui/PageTransition'
 import { useAuthStore } from '../store/authStore'
 
 function Login() {
@@ -52,6 +53,7 @@ try {
 }
 
 return (
+    <PageTransition>
     <div className="min-h-screen flex items-center justify-center px-4">
 
       {/* Fondo con luces */}
@@ -180,6 +182,7 @@ return (
         </p>
     </div>
     </div>
+    </PageTransition>
 )
 }
 

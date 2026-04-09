@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import AnimeCard from '../components/ui/AnimeCard'
 import FilterBar from '../components/ui/FilterBar'
 import LoadingGrid from '../components/ui/LoadingGrid'
+import PageTransition from '../components/ui/PageTransition'
 import Pagination from '../components/ui/Pagination'
 import SearchBar from '../components/ui/SearchBar'
 import SEO from '../components/ui/SEO'
@@ -60,10 +61,13 @@ const handleTypeChange = (type) => {
     setCurrentPage(1)
 }
 
+// ... (Toda la lógica de arriba se queda igual)
+
 return (
+<PageTransition>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-        <SEO
+    <SEO
         title="Directorio de Anime | AriVerse"
         description="Explora más de 30,000 animes. Busca por nombre, filtra por tipo y descubre tu próximo favorito en nuestro catálogo completo."
         url="https://ariverse-primerapagina.vercel.app/directorio"
@@ -125,8 +129,8 @@ return (
     {!loading && !error && animes.length > 0 && (
         <>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {animes.map((anime) => (
-            <AnimeCard key={anime.mal_id} anime={anime} />
+            {animes.map((anime, index) => (
+            <AnimeCard key={anime.mal_id} anime={anime} index={index} />
             ))}
         </div>
 
@@ -139,7 +143,6 @@ return (
     )}
 
     </div>
+</PageTransition>
 )
 }
-
-export default Directorio

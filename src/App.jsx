@@ -1,5 +1,6 @@
+import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Footer from './components/layout/Footer'
 import Navbar from './components/layout/Navbar'
 import AdminEditor from './pages/admin/AdminEditor'
@@ -20,6 +21,7 @@ import { useAuthStore } from './store/authStore'
 
 function App() {
   const initialize = useAuthStore(state => state.initialize)
+  const location = useLocation()
 
 useEffect(() => {
   initialize()
@@ -29,6 +31,7 @@ useEffect(() => {
     <div className="min-h-screen bg-dark-bg text-white flex flex-col">
       <Navbar />
       <main className="flex-1">
+        <AnimatePresence mode="wait">
         <Routes>
           <Route path="/"           element={<Home />} />
           <Route path="/directorio" element={<Directorio />} />
@@ -45,6 +48,7 @@ useEffect(() => {
           <Route path="/admin/noticias/nueva" element={<AdminEditor />} />
           <Route path="/admin/noticias/editar/:id" element={<AdminEditor />} />
         </Routes>
+        </AnimatePresence>
       </main>
       <Footer />
     </div>

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import PageTransition from '../components/ui/PageTransition'
 import { actualizarEstado, eliminarAnime, getMiLista } from '../services/listaService'
 import { useAuthStore } from '../store/authStore'
 
@@ -177,6 +178,7 @@ function MiLista() {
   )
 
   return (
+    <PageTransition>
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
       {/* Header */}
@@ -265,6 +267,7 @@ function MiLista() {
         </>
       )}
     </div>
+    </PageTransition>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import LoadingGrid from '../components/ui/LoadingGrid'
+import PageTransition from '../components/ui/PageTransition'
 import Pagination from '../components/ui/Pagination'
 import SEO from '../components/ui/SEO'
 import { searchAnimeWithFilters } from '../services/jikanApi'
@@ -18,7 +19,7 @@ return (
 }
 
 // ─── Card destacada para top 3 ────────────────────────────────────────────────
-function TopCard({ anime, rank }) {
+function TopCard({ anime, rank, index }) {
 const borderColors = {
     1: 'border-yellow-400 shadow-yellow-400/30',
     2: 'border-gray-300 shadow-gray-300/30',
@@ -75,7 +76,7 @@ return (
 }
 
 // ─── Fila de la tabla para el resto ──────────────────────────────────────────
-function RankRow({ anime, rank }) {
+function RankRow({ anime, rank, index }) {
 return (
     <Link
     to={`/anime/${anime.mal_id}`}
@@ -169,6 +170,7 @@ const restAnime = animes.slice(3)
   const rankOffset = (currentPage - 1) * 20
 
 return (
+    <PageTransition>
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         <SEO
@@ -239,6 +241,7 @@ return (
                 key={anime.mal_id}
                 anime={anime}
                 rank={rankOffset + (currentPage === 1 ? i + 4 : i + 1)}
+                index={i + (currentPage === 1 ? 3 : 0)}
                 />
             ))}
             </div>
@@ -255,6 +258,7 @@ return (
         </>
     )}
     </div>
+    </PageTransition>
 )
 }
 

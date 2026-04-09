@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import PageTransition from '../components/ui/PageTransition'
 import { getMiLista } from '../services/listaService'
 import { getEstadisticas, getPerfil, updatePerfil, uploadAvatar } from '../services/perfilService'
 import { useAuthStore } from '../store/authStore'
@@ -219,6 +220,7 @@ if (loading) return (
 )
 
 return (
+    <PageTransition>
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
       {/* ── Header del perfil ── */}
@@ -334,6 +336,7 @@ return (
     />
 
     </div>
+    </PageTransition>
 )
 }
 

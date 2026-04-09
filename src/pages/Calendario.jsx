@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import PageTransition from '../components/ui/PageTransition'
 import SEO from '../components/ui/SEO'
 import { getSeasonByYear } from '../services/jikanApi'
 
@@ -108,6 +109,7 @@ useEffect(() => {
 const years = Array.from({ length: 6 }, (_, i) => getCurrentYear() - i)
 
 return (
+    <PageTransition>
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         <SEO
@@ -206,6 +208,7 @@ url="https://ariverse-primerapagina.vercel.app/calendario"
         </div>
     )}
     </div>
+    </PageTransition>
 )
 }
 
