@@ -146,3 +146,5 @@ return (
 </PageTransition>
 )
 }
+
+export default Directorio
