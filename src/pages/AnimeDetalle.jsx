@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import PageTransition from '../components/ui/PageTransition'
 import ReviewSection from '../components/ui/ReviewSection'
 import SEO from '../components/ui/SEO'
+import StreamingSection from '../components/ui/StreamingSection'
 import { getAnimeById, getAnimeCharacters } from '../services/jikanApi'
 import { actualizarEstado, agregarAnime, eliminarAnime, verificarEnLista } from '../services/listaService'
 import { useAuthStore } from '../store/authStore'
@@ -413,6 +414,12 @@ type="article"
             {anime.synopsis ?? 'Sin sinopsis disponible.'}
         </p>
         </section>
+
+        {/* Streaming e idiomas */}
+        <StreamingSection
+        animeId={Number(id)}
+        anime={anime}
+        />
 
         {/* Tráiler */}
         <TrailerSection trailer={anime.trailer} />

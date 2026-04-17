@@ -155,3 +155,8 @@ export const getAnimeByGenre = async (genreId, limit = 12) => {
   const data = await fetchFromAPI(`/anime?genres=${genreId}&limit=${limit}&order_by=score&sort=desc`)
   return data.data
 }
+// Obtener info de streaming de un anime
+export const getAnimeStreaming = async (id) => {
+  const data = await fetchFromAPI(`/anime/${id}/streaming`)
+  return data.data
+}
