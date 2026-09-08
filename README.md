@@ -1,16 +1,34 @@
-# React + Vite
+# Ariverse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mi primera página web "en serio": una plataforma para explorar anime por categorías y enterarte de noticias del mundo del anime.
 
-Currently, two official plugins are available:
+**Demo en vivo:** [ariverse-primerapagina.vercel.app](https://ariverse-primerapagina.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ¿Qué hace?
 
-## React Compiler
+- Explora anime organizado por categorías
+- Consulta información en tiempo real gracias a la [Jikan API](https://jikan.moe/) (API no oficial de MyAnimeList)
+- Navegación entre varias vistas (inicio, categorías, noticias) usando React Router
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologías
 
-## Expanding the ESLint configuration
+- **React** + **Vite**
+- **React Router** para el manejo de rutas
+- **Tailwind CSS** para los estilos
+- **Jikan API** (MyAnimeList) como fuente de datos
+- Deploy en **Vercel**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Cómo correrlo localmente
+
+```bash
+git clone https://github.com/yayot0/ariverse-primerapagina.git
+cd ariverse-primerapagina
+npm install
+npm run dev
+```
+
+Abre `http://localhost:5173` en tu navegador.
+
+## Notas
+
+Este proyecto fue mi primer acercamiento serio a construir una aplicación completa con React, consumiendo una API externa real y manejando múltiples vistas.
